@@ -245,6 +245,7 @@ export default {
     this.loadingMiddle()
 
     this.preload()
+    //计算列数
     this.cols = this.calcuCols()
     this.$on('preloaded', () => {
       this.isFirstLoad = false
@@ -401,7 +402,9 @@ export default {
     bindClickEvent() {
       this.$el.querySelector(".vue-waterfall-easy")
         .addEventListener('click', e => {
+          e.preventDefault();
           var targetEl = e.target;
+          // 找到类img-inner-box元素
           if (e.target.className.indexOf('over') !== -1) return
           if (targetEl.className.indexOf("img-box") != -1) return
           while (targetEl.className.indexOf("img-inner-box") == -1) {
@@ -438,7 +441,9 @@ export default {
       })
 
     },
-    // other
+    /**
+     * 将加载元素及进行居中
+     */
     loadingMiddle() {
       // 对滚动条宽度造成的不居中进行校正
       var scrollEl = this.$el.querySelector('.vue-waterfall-easy-scroll')
